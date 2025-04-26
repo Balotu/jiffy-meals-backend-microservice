@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-server
+  namespace: jiffymeals
+  labels:
+    app: order-server
+spec: 
+  selector:
+    matchLabels:
+      app: order-server
+  template:
+    metadata:
+      labels:
+        app: order-server
+    spec:
+      containers:
+      - name: order-server
+        image: balotu/order:latest
+        ports: 
+        - containerPort: 8766
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-server
+  namespace: jiffymeals
+  labels:
+    app: order-server
+spec: 
+  selector:
+    app: order-server
+  ports: 
+    - protocol: TCP
+      port: 8766
+      targetPort: 8766
+      nodePort: 30005
+  type: NodePort 
