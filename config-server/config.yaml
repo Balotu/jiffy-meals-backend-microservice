@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: config-server
-        image: balotu/config:latest
+        image: balotu/eureka:latest
         ports: 
         - containerPort: 8769
 
